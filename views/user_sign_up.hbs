@@ -1,0 +1,18 @@
+<head>
+    <link href="/style.css" rel="stylesheet">
+</head>
+
+{{>header}}
+<br>
+<h1>User sign up</h1>
+<br>
+<form action="/user/create" method="POST">
+    <input type="email" name="user_email" placeholder="Enter your email." required>
+    <input type="password" name="password" placeholder="Enter your password." required>
+    <input type="text" name="name" placeholder="Enter your name." required>
+    <input type="password" name="confirm_password" placeholder="Confirm your password." required>
+    <br><br>
+    <input type="submit" value="Sign up">
+
+</form>
+{{>footer}}

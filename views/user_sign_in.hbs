@@ -1,0 +1,17 @@
+<head>
+    <link href="/style.css" rel="stylesheet">
+</head>
+
+{{>header}}
+<br>
+<h1>User sign in</h1>
+<br>
+<form action="./profile" method="post">
+    <input type="text" name="user_email" placeholder="Enter your email.">
+    <input type="password" name="password" placeholder="Enter your password.">
+    
+    <br><br>
+    <button type="submit">Submit</button>
+
+</form>
+{{>footer}}
