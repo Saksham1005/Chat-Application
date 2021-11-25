@@ -1,17 +1,24 @@
 const User=require("../model/user_model")
 
 module.exports.title_page=(req,res)=>{
-    res.send("Loaded the first page")
+    res.render("app_page.hbs",{})
 }
 
 module.exports.user_sign_in=(req,res)=>{
     // console.log(req.cookies);
-    res.cookie("user_id","25")
-    res.render("user_sign_in.hbs",{})
+    if(req.isAuthenticated()){
+        return res.redirect("/user/profile")
+    }
+    else
+     return res.render("user_sign_in.hbs",{});
 }
 
 module.exports.user_sign_up=(req,res)=>{
-    res.render("user_sign_up.hbs",{})
+    if(req.isAuthenticated()){
+        return res.redirect("/user/profile");
+    }
+    else
+     return res.render("user_sign_up.hbs",{});
 }
 
 module.exports.create=(req,res)=>{
@@ -44,4 +51,42 @@ module.exports.create=(req,res)=>{
             return res.redirect("back");
         }
     })
+}
+
+module.exports.create_session=(req,res)=>{
+    res.redirect("/user/profile")
+}
+
+module.exports.profile=(req,res)=>{
+    // res.send("This is the profile page")
+    if(!req.isAuthenticated()){
+        return res.redirect("/user/sign-in");
+    }
+    else
+    return res.render('profile.hbs',{})
+    // if(req.cookies.chat_app){
+    //     console.log(req.cookies.chat_app)
+    //     User.findOne({_id:req.cookies.chat_app},(err,user)=>{
+    //         if(err){
+    //             return console.log("Error while fetching the user!");
+    //         }
+    //         if(!user){
+    //             console.log("Unable to find the user!")
+    //             return res.redirect("/user/sign-in")
+    //         }
+ 
+    //         return res.send({
+    //             user_id:user.user_email
+    //         });
+    //     })
+    // }
+    // else{
+    //     return res.redirect("/user/sign-in");
+    // }
+}
+
+module.exports.destroy_session=(req,res)=>{
+        // TODO later
+        res.clearCookie("chat_app")
+        res.redirect("/user/sign-in")
 }

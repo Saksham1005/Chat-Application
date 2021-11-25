@@ -7,3 +7,6 @@ useNewUrlParser: true,
 //Above two were creating problem
 useUnifiedTopology: true 
 })
+
+const db=mongoose.connection;
+module.exports=db;

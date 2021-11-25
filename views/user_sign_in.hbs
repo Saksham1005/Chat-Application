@@ -1,12 +1,11 @@
-<head>
-    <link href="/style.css" rel="stylesheet">
-</head>
-
 {{>header}}
+<head>
+    <link href="/css/style.css" rel="stylesheet">
+</head>
 <br>
 <h1>User sign in</h1>
 <br>
-<form action="./profile" method="post">
+<form action="/user/create-session" method="post">
     <input type="text" name="user_email" placeholder="Enter your email.">
     <input type="password" name="password" placeholder="Enter your password.">
     

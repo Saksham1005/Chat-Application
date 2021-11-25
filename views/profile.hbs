@@ -1,0 +1,13 @@
+{{>header}}
+<head>
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<br>
+{{user.name}}<br>
+{{user.user_email}}
+<br><br>
+<form action="/user/sign-out" method="get">
+    <input type="submit" value="Sign out">
+</form>
+<br>
+{{>footer}}

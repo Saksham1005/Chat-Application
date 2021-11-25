@@ -1,3 +1,20 @@
 <header>
-    <h1>Ninja Chat app</h1>
+   <body>
+         <div class="head"><a href="/">Ninja Chat app</a>
+   
+   <div>
+    {{#if user.name }}
+       <a id="profile" href="/user/profile">{{user.name}}</a>
+   </div>
+   
+   <div>
+       <a id="sign-out" href="/user/sign-out">Sign Out</a> 
+   
+    {{else}}
+       <a id="sign-out" href="/user/sign-in">Sign In</a> 
+       
+    {{/if}}
+   </div>
+         </div>
+    </body>
 </header>
