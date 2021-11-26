@@ -1,4 +1,5 @@
 const User=require("../model/user_model")
+const Post=require("../model/posts")
 
 module.exports.title_page=(req,res)=>{
     res.render("app_page.hbs",{})
@@ -90,3 +91,12 @@ module.exports.destroy_session=(req,res)=>{
         res.clearCookie("chat_app")
         res.redirect("/user/sign-in")
 }
+
+
+// module.exports.create_post=(req,res)=>{
+//     if(req.isAuthenticated()){
+//         Post.create({content:req.body.content,user:},(err,post)=>{
+
+//         })
+//     }
+// }

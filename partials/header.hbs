@@ -1,20 +1,22 @@
 <header>
    <body>
-         <div class="head"><a href="/">Ninja Chat app</a>
-   
-   <div>
-    {{#if user.name }}
-       <a id="profile" href="/user/profile">{{user.name}}</a>
-   </div>
-   
-   <div>
-       <a id="sign-out" href="/user/sign-out">Sign Out</a> 
-   
-    {{else}}
-       <a id="sign-out" href="/user/sign-in">Sign In</a> 
-       
-    {{/if}}
-   </div>
+   <div class="head">
+         <div class="app_name">
+            <a href="/">Ninja Chat app</a>
          </div>
+         {{#if user.name }}
+         <div class="section-profile">
+            <a id="profile" href="/user/profile">{{user.name}}</a>
+         </div>
+         <div>
+            <a id="sign-out" href="/user/sign-out">Sign Out</a> 
+         </div>         
+         {{else}}
+         <div class="section-signout">
+            <a id="sign-out" href="/user/sign-in">Sign In</a> 
+         </div>
+         {{/if}}
+   
+   </div>
     </body>
 </header>

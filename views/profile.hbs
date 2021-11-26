@@ -6,8 +6,16 @@
 {{user.name}}<br>
 {{user.user_email}}
 <br><br>
-<form action="/user/sign-out" method="get">
+<section>
+    <form action="/user/posts" method="post">
+    Posts<br><br>
+        <textarea name="content" id="content" placeholder="Type Here ...." rows="3" cols="30"></textarea>
+        <br><br>
+        <input type="submit" value="Submit">
+    </form>
+</section>
+{{!-- <form action="/user/sign-out" method="get">
     <input type="submit" value="Sign out">
-</form>
+</form> --}}
 <br>
 {{>footer}}
