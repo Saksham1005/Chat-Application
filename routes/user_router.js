@@ -16,5 +16,4 @@ router.post("/user/create-session",passport.authenticate(
 router.get("/user/profile",passportLocal.checkAuthentication,user_controller.profile)
 router.get("/user/sign-out",user_controller.destroy_session)
 
-// router.post("/user/post",passportLocal.checkAuthentication,user_controller.create_post)
 module.exports=router

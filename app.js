@@ -2,7 +2,7 @@ const express=require("express");
 const hbs=require("hbs");
 const path=require("path");
 const port=3000;
-const user_router=require("./routes/user_router");
+const router=require("./routes/index");
 const cookie_parser=require("cookie-parser")
 const db=require("./config/mongoose");
 const session=require("express-session")
@@ -50,7 +50,7 @@ app.use(passport.session());
 
 app.use(passportLocal.setAuthenticatedUser);
 
-app.use(user_router)
+app.use(router)
 
 app.listen(port,()=>{
     console.log("App is running on port: "+port);
