@@ -1,7 +1,19 @@
 const User=require("../model/user_model")
+const Post=require("../model/posts")
 
 module.exports.title_page=(req,res)=>{
-    res.render("app_page.hbs",{})
+    Post.find({}).populate('user').exec(function(err,posts){
+        if(err){
+            console.log("Posts cannot be displayed");
+            return;
+        }
+        else{
+            return res.render("app_page.hbs",{
+                posts
+            })
+        }
+    })
+        
 }
 
 module.exports.user_sign_in=(req,res)=>{

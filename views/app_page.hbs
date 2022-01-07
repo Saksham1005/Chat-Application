@@ -5,4 +5,28 @@
 <br>
 Ninja App
 <br>
+<section id="feed-posts">
+    <form action="/post/create" id="new-post-form" method="post">
+    Posts<br><br>
+        <textarea name="content" id="content" placeholder="Type Here ...." rows="3" cols="30"></textarea>
+        <br><br>
+        <input type="submit" value="Submit">
+    </form>
+</section>
+
+<p>Posts of the user</p>
+
+<br>
+    <div class="posts">
+        {{#each posts}}
+            <div class="post">
+                {{this.content}}
+                <br>
+                {{this.user.name}}
+            </div>
+            <br>
+        {{/each}}
+    </div>
+
+<br>
 {{>footer}}
