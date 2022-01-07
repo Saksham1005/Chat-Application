@@ -5,6 +5,7 @@
 <br>
 Ninja App
 <br>
+{{#if user.name}}
 <section id="feed-posts">
     <form action="/post/create" id="new-post-form" method="post">
     Posts<br><br>
@@ -13,8 +14,9 @@ Ninja App
         <input type="submit" value="Submit">
     </form>
 </section>
+{{/if}}
 
-<p>Posts of the user</p>
+<p>Posts of the users</p>
 
 <br>
     <div class="posts">
