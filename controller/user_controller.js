@@ -1,16 +1,43 @@
 const User=require("../model/user_model")
 const Post=require("../model/posts")
+const Comment=require("../model/comments")
 
 module.exports.title_page=(req,res)=>{
-    Post.find({}).populate('user').exec(function(err,posts){
+    Post.find({}).populate('user')
+    .populate({
+        path:'comments',
+        populate:{
+            path:'comment',
+            populate:{
+                path:'user'
+            }
+        }
+    })
+    .exec(function(err,posts){
         if(err){
             console.log("Posts cannot be displayed");
             return;
         }
+
+        // Comment.find({}).populate('user').exec(function(err,comment){
+        //     if(err){console.log("comments cannot be populated")}
+        //     else
+            
+        // })
         else{
-            return res.render("app_page.hbs",{
-                posts
-            })
+        // console.log(req.user.name);
+            if(req.isAuthenticated()){
+                // console.log("User is authenticated");
+                return res.render("app_page.hbs",{
+                    posts,
+                    ouser:req.user.name
+                })
+            }
+            else{
+                return res.render("app_page.hbs",{
+                    posts
+                })
+            }
         }
     })
         
@@ -86,7 +113,6 @@ module.exports.profile=(req,res)=>{
     //             console.log("Unable to find the user!")
     //             return res.redirect("/user/sign-in")
     //         }
- 
     //         return res.send({
     //             user_id:user.user_email
     //         });
@@ -99,7 +125,8 @@ module.exports.profile=(req,res)=>{
 
 module.exports.destroy_session=(req,res)=>{
         // TODO later
-        res.clearCookie("chat_app")
+        req.logout();
+        // res.clearCookie("chat_app")
         res.redirect("/user/sign-in")
 }
 

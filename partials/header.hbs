@@ -5,18 +5,19 @@
             <a href="/">Ninja Chat app</a>
          </div>
          {{#if user.name }}
-         <div class="section-profile">
-            <a id="profile" href="/user/profile">{{user.name}}</a>
-         </div>
-         <div>
-            <a id="sign-out" href="/user/sign-out">Sign Out</a> 
-         </div>         
-         {{else}}
-         <div class="section-signout">
-            <a id="sign-out" href="/user/sign-in">Sign In</a> 
-         </div>
+         
+            <div class="section-profile">
+               <a id="profile" href="/user/profile">{{user.name}}</a>
+               <a id="sign-out" href="/user/sign-out">Sign Out</a> 
+            </div>         
+            {{else}}
+            <div class="section-signout">
+               <a id="sign-in" href="/user/sign-in">Sign In</a> 
+               <a id="sign-up" href="/user/sign-up">Sign Up</a> 
+            </div>
+
          {{/if}}
    
    </div>
-    </body>
+   </body>
 </header>

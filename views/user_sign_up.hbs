@@ -1,18 +1,42 @@
 <head>
-    <link href="/style.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    
+    <link href="/css/sign_up.css" rel="stylesheet">
 </head>
+<body>    
 
 {{>header}}
-<br>
-<h1>User sign up</h1>
-<br>
-<form action="/user/create" method="POST">
-    <input type="email" name="user_email" placeholder="Enter your email." required>
-    <input type="password" name="password" placeholder="Enter your password." required>
-    <input type="text" name="name" placeholder="Enter your name." required>
-    <input type="password" name="confirm_password" placeholder="Confirm your password." required>
-    <br><br>
-    <input type="submit" value="Sign up">
 
-</form>
+<div class="container">
+    <br>
+    <h1>User sign up</h1>
+    <br>
+    <form action="/user/create" method="POST">
+        <div class="form_section">
+        <label for="">Name</label>
+        <input type="text" name="name" placeholder="Enter your name." required>
+        </div>
+
+        <div class="form_section">
+        <label for="">Email</label>
+        <input type="email" name="user_email" placeholder="Enter your email." required>
+        </div>
+        
+        <div class="form_section">
+        <label for="">Password</label>
+        <input type="password" name="password" placeholder="Enter your password." required>
+        </div>
+        
+        <div class="form_section">
+        <label for="">Confirm Password</label>
+        <input type="password" name="confirm_password" placeholder="Confirm your password." required>
+        </div>
+        
+        <br><br>
+        <input id="Submit" type="submit" value="Sign up">
+
+    </form>
+</div>
 {{>footer}}
+
+</body>

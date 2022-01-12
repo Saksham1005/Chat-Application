@@ -10,7 +10,7 @@ passport.use(new LocalStrategy({
         User.findOne({user_email},(err,user)=>{
             if(err){
                 console.log("Error while finding the user!!");
-               return done(err)
+                return done(err)
             }
             if(!user || user.password!=password){
                 return done(null,false)

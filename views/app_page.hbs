@@ -1,15 +1,17 @@
-{{>header}}
 <head>
     <link href="/css/style.css" rel="stylesheet">
 </head>
+<body>
+{{>header}}
+    
 <br>
 Ninja App
 <br>
-{{#if user.name}}
+{{#if ouser }}
 <section id="feed-posts">
     <form action="/post/create" id="new-post-form" method="post">
     Posts<br><br>
-        <textarea name="content" id="content" placeholder="Type Here ...." rows="3" cols="30"></textarea>
+        <textarea name="content" id="content" placeholder="Type Here ...." rows="3" cols="30" required></textarea>
         <br><br>
         <input type="submit" value="Submit">
     </form>
@@ -24,7 +26,34 @@ Ninja App
             <div class="post">
                 {{this.content}}
                 <br>
-                {{this.user.name}}
+                {{this.user.name}} creted the post! 
+                {{!-- <br> --}}
+                {{!-- Printing all the comments --}}
+                <br>
+                <p>Comments</p>
+                {{#if this.comments}}
+                {{#each this.comments}}
+                    {{this.comment.content}}
+                    <br>
+                    {{this.comment.user.name}}
+                    <br>
+                {{/each}}
+                <br>
+                {{/if}}
+                {{!-- <br> --}}
+
+                {{#if ../ouser }}
+                {{!-- {{user.name}} --}}
+                <br>
+                <section>
+                    <form action="/comment/create" method="post">
+                        <input type="hidden" name="post_id" value={{this._id}} >
+                        <textarea name="comment" cols="30" rows="3" placeholder="Write Comment...." required></textarea>
+                        <input type="submit" value="Submit Comment!!">
+                    </form>
+                </section>
+                {{/if}}
+                
             </div>
             <br>
         {{/each}}
@@ -32,3 +61,5 @@ Ninja App
 
 <br>
 {{>footer}}
+
+</body>
