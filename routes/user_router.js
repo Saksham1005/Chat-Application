@@ -13,7 +13,15 @@ router.post("/user/create-session",passport.authenticate(
     {failureRedirect: '/user/sign-in'}
 ),user_controller.create_session);
 
-router.get("/user/profile",passportLocal.checkAuthentication,user_controller.profile)
+// Google OAuth
+router.get("/user/auth/google",passport.authenticate("google",{scope:['profile','email']} ));
+router.get("/user/auth/google/callback",passport.authenticate(
+    "google", 
+    {failureRedirect:"/user/sign-in"}
+),user_controller.create_session);
+
+router.get("/user/profile/:_id",passportLocal.checkAuthentication,user_controller.profile)
 router.get("/user/sign-out",user_controller.destroy_session)
+router.post("/user/update_user/:id",user_controller.update_user)
 
 module.exports=router

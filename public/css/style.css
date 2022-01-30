@@ -1,93 +1,47 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200&family=Quicksand&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200;300&family=Quicksand&display=swap');
 *{
-    /* border: 1px green solid; */
+    font-family: 'Outfit', sans-serif;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+    list-style-type: none;
+    border: 1px soldi black;
 }
+
+html,body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
 body{
+    /* height: 100%; */
     margin: 0;
     padding: 0;
     font-family:Arial, Helvetica, sans-serif;
-    height: 100vh;
     overflow-y: auto;
     scroll-behavior: smooth;
     position: relative;
 }
 
-header{
-    /* height: 5vh; */
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-}
 
-header div.head{
-    padding: 0.5em;
-    display: grid;
-    grid-template-columns: 80vw auto;
-    background-color: rgb(0, 238, 255);
-}
-header div.head div{
-    /* display: inline-block; */
-    
-    /* width: 3em; */
-    /* height: auto; */
-}
 
-header div.head div.app_name{
-    display: inline-block;
-    /* width: 70vw; */
+.posts{
+    height: 100%;
+    width: 80vw;
 }
-
-header div.head a{
-    text-decoration: none;
-    font-size: large;
-    color: black;
-    display: inline-block;
-    margin: 0 0.5em;
-    white-space: nowrap;
-    /* padding: 0.5px; */
-    /* display: inline; */
-    /* width: 1em; */
-    /* display: inline-block; */
-    /* width: auto; */
+div.post{
+    /* display: block; */
+    /* width: 80vw; */
+    padding: 10px;
 }
-
-header div.head div.section-profile{
-    /* border: 1px green solid; */
-    /* width: 20vw; */
-    display: grid;
-    grid-template-columns: auto auto;
-    
+.friends{
+    padding: 10px;
+    border-left: 1px solid lightgray;
+    height: 100%;
 }
-
-header div.head div.section-signout{
-    /* border: 1px green solid; */
-    /* width: 20vw; */
-    display: grid;
-    grid-template-columns: auto auto;
-    
-}
-
-heder div.head div.section-profile a{
-    /* display: none; */
-    /* width: 2em; */
-}
-
-footer{
-    /* height: 20em; */
-    position: sticky;
-    bottom: 0;
-    left: 0;
-    top: 100%;
-    right: 0;
-    background-color: rgb(0, 238, 255);
-    /* width: 100vw; */
-    display: block;
-}
-footer div{
-    padding: 0.4em;
-    /* width: inherit; */
+.post_container{
     display: flex;
-    justify-content: left;
-    align-items: center;
-    font-size: larger;
+    height: 90%;
 }

@@ -1,13 +1,14 @@
+
+
 <header>
-   <body>
-   <div class="head">
+   <div class="head" >
          <div class="app_name">
             <a href="/">Ninja Chat app</a>
          </div>
          {{#if user.name }}
          
             <div class="section-profile">
-               <a id="profile" href="/user/profile">{{user.name}}</a>
+               <a id="profile" href="/user/profile/{{user._id}}">{{user.name}}</a>
                <a id="sign-out" href="/user/sign-out">Sign Out</a> 
             </div>         
             {{else}}
@@ -19,5 +20,4 @@
          {{/if}}
    
    </div>
-   </body>
 </header>

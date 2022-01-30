@@ -1,0 +1,10 @@
+{{#if ../../ouser }}
+    {{#compare ../../ouser "==" this.comment.user.id }}
+    <small><a href="/comment/destroy/{{this.comment._id}}"> X </a></small>
+    {{/compare}}
+{{/if}}
+
+    {{this.comment.content}}
+    <br>
+    {{this.comment.user.name}}
+    <br>

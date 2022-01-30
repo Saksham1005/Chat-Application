@@ -4,15 +4,17 @@ const User=require("../model/user_model")
 
 //signing up the user
 passport.use(new LocalStrategy({
-    usernameField:'user_email'
+    usernameField:'user_email',
+    passReqToCallback:true
 },
-    function(user_email,password,done){
+    function(req,user_email,password,done){
         User.findOne({user_email},(err,user)=>{
             if(err){
-                console.log("Error while finding the user!!");
+                req.flash('error',err);
                 return done(err)
             }
             if(!user || user.password!=password){
+                req.flash('error','Invalid Username/Password');
                 return done(null,false)
             }
             return done(null,user)
@@ -31,7 +33,7 @@ passport.deserializeUser((_id,done)=>{
     User.findOne({_id},(err,user)=>{
         if(err){
             console.log("Error while finding the user!!");
-           return done(err)
+            return done(err)
         }
         if(user)
         done(null,user)

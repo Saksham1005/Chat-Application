@@ -1,13 +1,50 @@
+<body>
+    
 {{>header}}
 <head>
     <link href="/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/footer.css">
+
 </head>
 <br>
-{{user.name}}<br>
-{{user.user_email}}
 <br>
-{{!-- <form action="/user/sign-out" method="get">
-    <input type="submit" value="Sign out">
-</form> --}}
+<br>
+{{!-- {{#compare user.id "!=" profile_user.id}} --}}
+<img src="{{profile_user.avatar}}" alt="{{profile_user.name}}" width="100">
+{{!-- {{/compare}} --}}
+
+<br><br>
+<div class="user_info">
+{{#if user}}
+
+<br>
+    {{#compare user.id "==" profile_user.id}}
+        <form action="/user/update_user/{{profile_user.id}}" method="post" enctype="multipart/form-data">
+            <input type="text" value="{{profile_user.name}}" name="name" placeholder="Your Name" required>
+            <br>
+            <input type="email" value="{{profile_user.user_email}}" name="user_email" placeholder="Your Email" required>
+            <br><br>
+            <label for="">Profile Image</label><br>
+            <input type="file" name="avatar">
+            <br><br>
+            <input type="submit" value="Submit">
+        </form>
+    {{/compare}}
+
+{{#compare user.id "!=" profile_user.id}}
+    <br>
+    <section>
+    {{profile_user.name}}<br>
+    {{profile_user.user_email}}
+    </section>
+    <br>
+{{/compare}}
+
+{{/if}}
+
+</div>
 <br>
 {{>footer}}
+
+</body>
