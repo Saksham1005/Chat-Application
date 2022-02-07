@@ -1,5 +1,7 @@
 header{
     display: block;
+    box-sizing: border-box;
+    height: 39px;
 }
 
 header div.head{

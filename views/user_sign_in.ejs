@@ -1,4 +1,5 @@
-{{>header}}
+<!-- {{>header}} -->
+<%- include("partials/header"); %>
 <head>
     <link href="/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/header.css">
@@ -18,23 +19,32 @@
     <button type="submit">Submit</button>
 
 </form>
-<p>
-    <a href="/user/auth/google" >Google Sign In/ Sign Up</a>
-</p>
+<br>
+    <p>
+        <a href="/user/forgot-password" >Forgot Password</a>
+    </p>
+<br>
+    <p>
+        <a href="/user/auth/google" >Google Sign In/ Sign Up</a>
+    </p>
 
-{{>footer}}
+<!-- {{>footer}} -->
+<%- include("partials/footer"); %>
 
 <script>
-    {{#if flash.error }}
-        {{#compare flash.error.length ">" 0 }}
+
+    // {{#if flash.error }}
+    <% if (flash.error && flash.error.length > 0) { %>
+        // {{#compare flash.error.length ">" 0 }}
             new Noty({
                 type:'error',
-                text: '{{flash.error}}',
+                text: '<%=flash.error%>',
                 layout:'topRight',
                 theme: 'relax',
                 timeout: 1500,
                 progressBar:true
             }).show();
-        {{/compare}}
-    {{/if}}
+        // {{/compare}}
+    <% } %>
+    // {{/if}}
 </script>

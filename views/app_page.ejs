@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/footer.css">
+
+    <!-- Noty notifications  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js" integrity="sha512-lOrm9FgT1LKOJRUXF3tp6QaMorJftUjowOWiDcG5GFZ/q7ukof19V0HKx/GWzXCdt9zYju3/KhBNdCLzK8b90Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css" integrity="sha512-0p3K0H3S6Q4bEWZ/WmC94Tgit2ular2/n0ESdfEX8l172YyQj8re1Wu9s/HT9T/T2osUw5Gx/6pAZNk3UKbESw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+    <!-- {{!-- jquery cdn --}} -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+</head>
+<body>
+
+    <%- include("partials/header"); %>
+
+        <div class="post_container">
+
+            <div class="posts">
+        <% if(locals.user){ %>
+        <section id="feed-posts" style="display: inline-block;">
+            <form action="/post/create" id="new-post-form" method="post">
+            Posts<br><br>
+                <textarea name="content" id="content" placeholder="Type Here ...." rows="3" cols="30" required></textarea>
+                <br><br>
+                <input type="submit" value="Submit">
+            </form>
+        </section>
+        <% } %>
+
+        <br>
+
+        <p>Posts of the users</p>
+
+        <ul>
+            <% for(let post of posts){ %>
+
+        <li class="post-<%= post._id %>" >
+            <div class="post" >
+
+                    <% if(locals.user && locals.user.id==post.user.id){ %>
+                    <small><a id="delete-post-button" href="/post/destroy/<%=post.id%>"> X </a></small>
+                    <% } %>
+
+                <%= post.content %>
+                <br>
+                <%= post.user.name %> creted the post! 
+                <br>
+
+                <!-- post like functionality for preloaded posts -->
+                <input type="text" class="post_like_value" value="<%= post.likes.length %>" style="width: 1em;">
+                <a href="/likes/toggle?id=<%= post._id %>&type=Post" class="post_like">Like</a>
+                <br><br>
+                
+                <p>Comments</p>
+                <div id="post-comments-<%=post.id%>">
+                <% for(let comment of post.comments){ %>
+                    <!-- <%= comment.comment.content %> -->
+                    <!-- <br> -->
+                    <!-- <%# comment.user.name %> -->
+                        <%# include("partials/comments"); %>
+
+                        <div id=comment-id-<%= comment.comment._id %>>
+
+                            <% if(locals.user && locals.user.id==comment.comment.user.id){ %>
+                                <small><a id="delete-comment-button" href="/comment/destroy/<%= comment.comment._id %>"> X </a></small>
+                            <% } %>    
+                    
+                            <%= comment.comment.content %>
+                            <br>
+                            <%= comment.comment.user.name %>
+                            <%# comment.comment.user %>
+                            <br>
+
+                            <!-- comment like functionality for preloaded comments -->
+                            <input type="text" class="comment_like_value" value="<%= comment.comment.likes.length %>" style="width: 1em;">
+                            <a href="/likes/toggle?id=<%= comment.comment._id %>&type=Comment" class="comment_like">Like</a>
+                            <!-- <button class="comment_like">Like</button> -->
+                            <br><br>
+                        </div>
+
+                <% } %>
+                </div>
+                <% if(locals.user){ %>
+                <section>
+                    <form id="comment-form" action="/comment/create" method="post">
+                        <input type="hidden" name="post_id" value=<%=post.id%> >
+                        <textarea name="comment" cols="30" rows="3" placeholder="Write Comment...." required></textarea>
+                        <input type="submit" value="Submit Comment!!">
+                    </form>
+                </section>
+                <% } %>
+                
+            </div>
+            <br>
+            </li>
+
+
+            <% } %>
+        </ul>
+    </div>
+
+    <div class="sidebar">
+        <div class="friends">
+        <%# include("partials/friends"); %>
+        <% if (typeof locals.user == 'object' && locals.user) { %>
+            <% if(user.friends.length!=0){ %>
+                <p>Friends</p>
+            <% }else{ %>
+                <p>You don't have any friends!</p>
+            <% } %>
+                <% for(let i=0; i<user.friends.length; i++) { %> 
+                    <p id="<%= user.friends[i].to_user._id %>">
+                        <a href="/friends?_id=<%= user.friends[i].to_user._id %>" id="friend">X</a>
+                        <a href="/user/profile/<%= user.friends[i].to_user._id %>"> 
+                            <%= user.friends[i].to_user.name %>
+                        </a>
+                    </p>
+                <% } %>
+            
+        <% } %>
+        
+        
+        
+        </div>
+        
+
+        
+        <div class="users friends">
+        <%- include("partials/users"); %>
+        </div>
+    </div>
+</div>
+
+<script>
+
+        <% if (flash.success && flash.success.length > 0) { %>
+
+            new Noty({
+                type:'success',
+                text: '<%=flash.success%>',
+                layout:'topRight',
+                theme: 'relax',
+                timeout: 1500,
+                progressBar:true
+            }).show();
+
+        <% } %>
+
+
+        <% if (flash.error && flash.error.length > 0) { %>
+            new Noty({
+                type:'error',
+                text: '<%=flash.error%>',
+                layout:'topRight',
+                theme: 'relax',
+                timeout: 1500,
+                progressBar:true
+            }).show();
+        <% } %>
+
+</script>
+
+<script src="/js/posts_comments_app_page.js"></script>
+<script src="/js/friends.js"></script>
+    
+</body>
+</html>
+
+
+
+

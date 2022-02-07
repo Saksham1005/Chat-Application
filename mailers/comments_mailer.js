@@ -2,20 +2,22 @@ const nodemailer=require("../config/nodemailer");
 const User = require("../model/user_model");
 
 // this is another way of exporting a method
-exports.newComment=(user,comment)=>{
+exports.newComment=(comment)=>{
 
-    let htmlString=nodemailer.renderTemplate({user,comment},'/new_comment.hbs');
+    let htmlString=nodemailer.renderTemplate({comment},'/new_comment.ejs');
 
     nodemailer.transporters.sendMail({
         from:'happygroup.mega@gmail.com',
-        to:user.user_email,
+        to:comment.user.user_email,
         subject:"New comment Published",
-        html:"gfhd"
+        html:htmlString
     },(err,info)=>{
         if(err){
             return console.log("Error in sending mail",err)
         }
-        return console.log("Message sent", info);
+        // console.log(info);
+        
+        return console.log("Message sent");
     })
 
 }

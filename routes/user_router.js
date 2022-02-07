@@ -24,4 +24,18 @@ router.get("/user/profile/:_id",passportLocal.checkAuthentication,user_controlle
 router.get("/user/sign-out",user_controller.destroy_session)
 router.post("/user/update_user/:id",user_controller.update_user)
 
+// forgot password url on sign in
+router.get("/user/forgot-password",user_controller.forgot_password);
+
+// route 2
+// email will be sent with user details and token
+router.post("/user/change-password/email", user_controller.change_password_email);
+
+// route 3
+// User clicks email link having url user/change-password/token-id
+router.post("/user/change-password",user_controller.change_password); 
+
+// route 4
+router.post("/user/change-password/auth", user_controller.change_password_auth);
+
 module.exports=router

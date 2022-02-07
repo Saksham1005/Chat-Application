@@ -3,21 +3,23 @@
 <header>
    <div class="head" >
          <div class="app_name">
-            <a href="/">Ninja Chat app</a>
+            <a href="/">Chat app</a>
          </div>
-         {{#if user.name }}
+         <!-- {{#if user.name }} -->
+         <% if(locals.user) { %>
          
             <div class="section-profile">
-               <a id="profile" href="/user/profile/{{user._id}}">{{user.name}}</a>
+               <a id="profile" href="/user/profile/<%=locals.user.id%>"><%=locals.user.name%></a>
                <a id="sign-out" href="/user/sign-out">Sign Out</a> 
             </div>         
-            {{else}}
+            <!-- {{else}} -->
+         <% } else { %>
             <div class="section-signout">
                <a id="sign-in" href="/user/sign-in">Sign In</a> 
                <a id="sign-up" href="/user/sign-up">Sign Up</a> 
             </div>
-
-         {{/if}}
+         <% } %>
+         <!-- {{/if}}  -->
    
    </div>
 </header>

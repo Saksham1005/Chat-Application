@@ -1,38 +1,58 @@
 const Comment=require("../model/comments")
 const Post=require("../model/posts")
-const mongoose=require("mongoose")
-const { post } = require("../routes")
-const User = require("../model/user_model")
+const Like=require("../model/like")
+// const mongoose=require("mongoose")
+// const { post } = require("../routes")
+// const User = require("../model/user_model")
 
-const comments_mailer=require("../mailers/comments_mailer")
+// const comments_mailer=require("../mailers/comments_mailer")
+const queue=require("../config/kue");
+// const commentEmailWorker=require('../workers/comment_email_worker');
 
 module.exports.create=async function(req,res){
     // console.log(req.body.post_id);
     try {
+        // console.log("comment creation!")
         const post=await Post.findOne({_id:req.body.post_id})
 
-        const comment= await Comment.create({
+        // Comment.create(...).populate(...) is not a function
+        let comment= await Comment.create({
             content:req.body.comment,
             user:req.user._id,
             post:req.body.post_id
         })
+        
+        comment= await Comment.findOne(comment)
+        .populate({
+            path:"user"
+        })
+        
+        // console.log(comment);
 
-        const user=await User.findById(req.user._id);
 
         post.comments.push({
             comment:comment._id
         });
         await post.save();
 
-        comments_mailer.newComment(user,comment);
+        // Not sending comment mails
+        
+        // comments_mailer.newComment(comment);
+        // let job=queue.create('emails',comment).save(function(err){
+        //     if(err){
+        //         return console.log("Error in sending to the queue", err);
+        //     }
+
+        //     console.log("job enqueued", job.id);
+
+        // });
 
         if(req.xhr){
             return res.status(200).json({
                 data:{
                     comment
                 },
-                message:"Comment Created!",
-                name:user.name
+                message:"Comment Created!"
             })
         }
 
@@ -40,6 +60,7 @@ module.exports.create=async function(req,res){
         return res.redirect("back");
         
     } catch (error) {
+        console.log(error);
         req.flash('error',error)
         return res.redirect("back");
     }
@@ -50,16 +71,26 @@ module.exports.destroy=async(req,res)=>{
 
     try {
         const _id=req.params._id;
-        const comment= await Comment.findOne({_id}) 
+        // console.log(_id);
+        let comment= await Comment.findOne({_id})
 
+        // console.log(comment);
+        // console.log(comment.post);
         const post=await Post.findOne({_id:comment.post})
 
         post.comments=post.comments.filter((c)=>{
             return c.comment!=_id;
         })
-        await post.save();
-        await comment.remove();
 
+        await post.save();
+        
+        comment.likes=comment.likes.forEach(async function(like_id){
+            const like=await Like.findById(like_id);
+            await like.remove();
+        })
+
+        comment=await comment.remove();
+        // console.log(comment);
         if(req.xhr){
             return res.status(200).json({
                 data:{
@@ -73,6 +104,8 @@ module.exports.destroy=async(req,res)=>{
         return res.redirect('back');
 
     } catch (error) {
+        // console.log("Unable to delete comment!")
+        console.log(error)
         req.flash('error',error)
         return res.redirect('back');
     }

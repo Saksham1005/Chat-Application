@@ -1,5 +1,6 @@
 const express=require("express");
-const hbs=require("hbs");
+// const hbs=require("hbs");
+const ejs=require("ejs");
 const path=require("path");
 const port=3000;
 const router=require("./routes/index");
@@ -8,9 +9,9 @@ const db=require("./config/mongoose");
 const session=require("express-session")
 const MongoStore=require('connect-mongo')(session);
 const passportGoogle=require("./config/passport-google-oauth2-strategy");
-const helpers = require('handlebars-helpers')({
-    handlebars: hbs
-});
+// const helpers = require('handlebars-helpers')({
+//     handlebars: hbs
+// });
 
 // Flash messages
 const flash=require('connect-flash')
@@ -20,20 +21,20 @@ const customMware=require('./config/middleware')
 const app=express();
 const public_directory=path.join(__dirname,"./public")
 const views=path.join(__dirname,"./views")
-const partials=path.join(__dirname,"./partials")
+// const partials=path.join(__dirname,"./partials")
 const passport=require("passport")
 const passportLocal=require("./config/passport")
 const passportJWT=require("./config/passport-jwt")
 
-app.use(express.urlencoded())
+app.use(express.urlencoded({ extended: true }))
 app.use(cookie_parser())
 
 app.use(express.static(public_directory));
 //making multer files to be accessible
 app.use('/uploads',express.static(path.join(__dirname,"/uploads")));
-app.set("views-engine","hbs");
+app.set("view engine","ejs");
 app.set("views",views)
-hbs.registerPartials(partials)
+// hbs.registerPartials(partials)
 app.use(express.json())
 
 app.use(session({

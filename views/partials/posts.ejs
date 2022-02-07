@@ -1,0 +1,46 @@
+        <!-- {{!-- <li class="post-{{this._id}}" > --}} -->
+            <div class="post" post-{{this._id}}>
+
+                <!-- {{#if ../ouser }}
+                    {{#compare ../ouser "==" this.user.id }} -->
+                    <% if(locals.user && locals.user.id==post.user.id){ %>
+                    <small><a class="delete-post-button" href="/post/destroy/{{this._id}}"> X </a></small>
+                    <% } %>
+                    <!-- {{/compare}}
+                {{/if}} -->
+
+                <!-- {{this.content}} -->
+                <%= post.content %>
+                <br>
+                <!-- {{this.user.name}} -->
+                <%= post.user.name %> creted the post! 
+
+                <!--  Printing all the comments -->
+                <br>
+                <p>Comments</p>
+                <!-- {{#each this.comments}}
+                    {{>comments this.comment}}
+                {{/each}} -->
+
+                <% for(let comment in post.comments){ %>
+                    <%- include("partials/comments"); %>
+                <% } %>   
+                <br>
+
+                <!-- {{#if ../ouser }}
+                {{!-- {{user.name}} --}}-->
+                <% if(locals.user){ %>
+                <br>
+                <section>
+                    <form action="/comment/create" method="post">
+                        <input type="hidden" name="post_id" value={{this._id}} >
+                        <textarea name="comment" cols="30" rows="3" placeholder="Write Comment...." required></textarea>
+                        <input type="submit" value="Submit Comment!!">
+                    </form>
+                </section>
+                <% } %>
+                <!-- {{/if}} -->
+                
+            </div>
+            <br>
+<!-- {{!-- </li> --}} -->

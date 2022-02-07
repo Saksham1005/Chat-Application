@@ -22,7 +22,15 @@ const user_schema=new mongoose.Schema({
     },
     avatar:{
         type:String
-    }
+    },
+    friends:[
+        // {
+            {
+                type:mongoose.Schema.Types.ObjectId,
+                ref:"Friends"
+            }
+        // }
+    ]
 },{
     timestamps:true
 })

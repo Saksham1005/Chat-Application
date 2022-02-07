@@ -1,5 +1,6 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200&family=Quicksand&display=swap'); */
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200;300&family=Quicksand&display=swap');
+
 *{
     font-family: 'Outfit', sans-serif;
     font-family: 'Quicksand', sans-serif;
@@ -37,11 +38,11 @@ div.post{
     padding: 10px;
 }
 .friends{
-    padding: 10px;
+    padding: 10px 10px 0 10px;
     border-left: 1px solid lightgray;
-    height: 100%;
+    height: inherit;
 }
 .post_container{
     display: flex;
-    height: 90%;
+    /* height: calc(100%); */
 }

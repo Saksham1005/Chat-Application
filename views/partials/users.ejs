@@ -1,0 +1,12 @@
+<% if (typeof all_users == 'object' && all_users) { %>
+    <p>Users</p>
+    <!-- <br> -->
+        <% for(let user of all_users) { %>
+            <div>
+                <a href="/user/profile/<%=user._id%>"> 
+                    <%= user.name %>
+                </a>
+            </div>
+            <br>
+        <% } %>
+<% } %>

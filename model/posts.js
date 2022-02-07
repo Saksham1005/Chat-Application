@@ -18,6 +18,12 @@ const post_schema=new mongoose.Schema({
                 ref:"Comment"
             }
         }
+    ],
+    likes:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'Like'
+        }
     ]
 },{
     timestamps:true

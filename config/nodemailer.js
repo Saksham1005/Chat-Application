@@ -1,5 +1,5 @@
 const nodemailer=require("nodemailer")
-const hbs=require("hbs")
+const ejs=require("ejs")
 const path=require("path")
 
 let transporters=nodemailer.createTransport({
@@ -15,7 +15,7 @@ let transporters=nodemailer.createTransport({
 
 let renderTemplate=(data,relativePath)=>{
     let mailHTML;
-    hbs.renderFile(
+    ejs.renderFile(
         path.join(__dirname, "../views/mailers",relativePath),
         data,
         function(err,template){

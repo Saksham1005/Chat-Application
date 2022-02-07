@@ -1,0 +1,17 @@
+
+<% if(typeof comment =="object"){ %>
+    <div id=comment-id-<%= comment.comment._id %>>
+
+        <% if(locals.user && locals.user.id==comment.comment.user.id){ %>
+            <small><a id="delete-comment-button" href="/comment/destroy/<%= comment.comment._id %>"> X </a></small>
+        <% } %>    
+
+        <%= comment.comment.content %>
+        <br>
+        <%= comment.comment.user.name %>
+        
+        <%# comment.comment.user %>
+
+        <br><br>
+    </div>
+<% } %>
