@@ -9,17 +9,61 @@ const db=require("./config/mongoose");
 const session=require("express-session")
 const MongoStore=require('connect-mongo')(session);
 const passportGoogle=require("./config/passport-google-oauth2-strategy");
-// const helpers = require('handlebars-helpers')({
-//     handlebars: hbs
-// });
+
+const env=require("./config/environment");
+const logger=require("morgan")
+const app=express();
+
+// Storing our logs in a seperate file
+app.use(logger(env.morgan.mode, env.morgan.options))
+
+// setup the chat server to be used with socket.io
+// app.use(require('cors')())
+const chatServer=require("http").Server(app);
+const chatSockets=require("./config/chat_sockets").chatSockets(chatServer);
+chatServer.listen(5000);
+console.log("chat server is listening on port 5000");
 
 // Flash messages
 const flash=require('connect-flash')
 const customMware=require('./config/middleware')
-// const sassMiddleware=require('no')
 
-const app=express();
-const public_directory=path.join(__dirname,"./public")
+// We only want to scss files to transpile only once!!!!!!!!!!!!!!
+// const sassMiddleware=require('no')
+// var sass = require('node-sass');
+// var result = sass.renderSync({
+//     file: './public/scss',
+//     // outputStyle: 'compressed',
+//     outFile: './public/css',
+//     sourceMap: true // or an absolute or relative (to outFile) path
+// });
+
+const gulp=require("gulp")
+const sass=require("gulp-sass")(require('sass'));
+
+gulp.task('css', () => {
+    console.log("gulp sass");
+    gulp.src('./public/sass/**/*.scss')
+    .pipe(sass())
+    .pipe(gulp.dest('./public/css.css'));
+});
+
+gulp.task('clean', () => {
+    return del([
+        'css/main.css',
+    ]);
+});
+
+gulp.task('default', gulp.series(['clean','css']));
+
+gulp.task('watch', () => {
+    gulp.watch('sass/**/*.scss', (done) => {
+        gulp.series(['clean', 'styles'])(done);
+    });
+});
+// buildStyles();
+
+const public_directory=path.join(__dirname, env.asset_path);
 const views=path.join(__dirname,"./views")
 // const partials=path.join(__dirname,"./partials")
 const passport=require("passport")
@@ -40,7 +84,7 @@ app.use(express.json())
 app.use(session({
     name:'chat_app',
     //Todo change the secret before deployment in production mode
-    secret:'something',
+    secret: env.session_cookie_key,
     saveUninitialized:false,
     //when user signs-in then the additional info should not be stored in the cookie 
     resave:false,

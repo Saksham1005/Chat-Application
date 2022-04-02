@@ -231,7 +231,7 @@ let delete_comment=function(delete_comment_button){
 
 let new_comment=function(comment){
     return $(`
-    <div id="comment-id-${comment._id}">
+    <div id="comment-id-${comment._id}" style="border: 1px black solid; border-radius: 20px; box-sizing: border-box; padding: 5px; margin-bottom: 0.8em;">
         <small><a id="delete-comment-button" href="/comment/destroy/${comment._id}"> X </a></small>
         ${comment.content}
         <br>
@@ -252,7 +252,7 @@ let newPostDOM=function(post,name){
     return $(`
                 <li class="post-${post._id}" >
                     <div class="post">
-                    <p>
+                    <p style="border: 1px black solid; border-radius: 20px; box-sizing: border-box; padding: 10px; margin-bottom: 0.8em;">
                         <small><a id="delete-post-button" href="/post/destroy/${post._id}"> X </a></small>
                     
                         ${post.content}

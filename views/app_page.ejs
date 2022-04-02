@@ -8,6 +8,7 @@
     <link href="/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/_chat_box.css">
 
     <!-- Noty notifications  -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js" integrity="sha512-lOrm9FgT1LKOJRUXF3tp6QaMorJftUjowOWiDcG5GFZ/q7ukof19V0HKx/GWzXCdt9zYju3/KhBNdCLzK8b90Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -16,7 +17,9 @@
 
     <!-- {{!-- jquery cdn --}} -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+    <!-- <%# cdn for socket.io %> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js" integrity="sha512-MgkNs0gNdrnOM7k+0L+wgiRc5aLgl74sJQKbIWegVIMvVGPc1+gc1L2oK9Wf/D9pq58eqIJAxOonYPVE5UwUFA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.0/socket.io.js" integrity="sha512-arrjWL9j77mqBliRaQx5EutCwBC7259LWHAkOhDVpCoGVx4sRMcnYBBs0HedwvLvWqn7/bmBlr20eiESgHe2tg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
 
@@ -45,7 +48,7 @@
 
         <li class="post-<%= post._id %>" >
             <div class="post" >
-
+                <p style="border: 1px black solid; border-radius: 20px; box-sizing: border-box; padding: 10px; margin-bottom: 0.8em;">
                     <% if(locals.user && locals.user.id==post.user.id){ %>
                     <small><a id="delete-post-button" href="/post/destroy/<%=post.id%>"> X </a></small>
                     <% } %>
@@ -58,17 +61,18 @@
                 <!-- post like functionality for preloaded posts -->
                 <input type="text" class="post_like_value" value="<%= post.likes.length %>" style="width: 1em;">
                 <a href="/likes/toggle?id=<%= post._id %>&type=Post" class="post_like">Like</a>
-                <br><br>
+                </p>
+                <!-- <br><br> -->
                 
                 <p>Comments</p>
-                <div id="post-comments-<%=post.id%>">
+                <div id="post-comments-<%=post.id%>" >
                 <% for(let comment of post.comments){ %>
                     <!-- <%= comment.comment.content %> -->
                     <!-- <br> -->
                     <!-- <%# comment.user.name %> -->
                         <%# include("partials/comments"); %>
 
-                        <div id=comment-id-<%= comment.comment._id %>>
+                        <div id=comment-id-<%= comment.comment._id %> style="border: 1px black solid; border-radius: 20px; box-sizing: border-box; padding: 5px; margin-bottom: 0.8em;">
 
                             <% if(locals.user && locals.user.id==comment.comment.user.id){ %>
                                 <small><a id="delete-comment-button" href="/comment/destroy/<%= comment.comment._id %>"> X </a></small>
@@ -137,6 +141,9 @@
         <div class="users friends">
         <%- include("partials/users"); %>
         </div>
+
+        <%- include("partials/_chat_box"); %>
+        
     </div>
 </div>
 
@@ -171,7 +178,14 @@
 
 <script src="/js/posts_comments_app_page.js"></script>
 <script src="/js/friends.js"></script>
-    
+
+<script src="/js/chat_engine.js"></script>
+<% if(locals.user){ %>
+    <script>
+        new ChatEngine("user-chat-box","<%= locals.user.user_email %>")
+    </script>
+<% } %>
+
 </body>
 </html>
 
