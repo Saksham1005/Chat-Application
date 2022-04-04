@@ -12,7 +12,7 @@ const accessLogStream=rfs.createStream("access.log",{
 
 const development={
     name:"developmemt",
-    asset_path:"/public",
+    asset_path:"/assets",
     session_cookie_key:"something",
     db:"chat-app",
     smtp:{

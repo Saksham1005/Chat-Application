@@ -38,29 +38,6 @@ const customMware=require('./config/middleware')
 //     sourceMap: true // or an absolute or relative (to outFile) path
 // });
 
-const gulp=require("gulp")
-const sass=require("gulp-sass")(require('sass'));
-
-gulp.task('css', () => {
-    console.log("gulp sass");
-    gulp.src('./public/sass/**/*.scss')
-    .pipe(sass())
-    .pipe(gulp.dest('./public/css.css'));
-});
-
-gulp.task('clean', () => {
-    return del([
-        'css/main.css',
-    ]);
-});
-
-gulp.task('default', gulp.series(['clean','css']));
-
-gulp.task('watch', () => {
-    gulp.watch('sass/**/*.scss', (done) => {
-        gulp.series(['clean', 'styles'])(done);
-    });
-});
 // buildStyles();
 
 const public_directory=path.join(__dirname, env.asset_path);
