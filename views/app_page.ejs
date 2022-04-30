@@ -5,10 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="/css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/header.css">
-    <link rel="stylesheet" href="/css/footer.css">
-    <link rel="stylesheet" href="/css/_chat_box.css">
+    <link href="<%= assetPath('css/style.css') %>" rel="stylesheet">
+    <link rel="stylesheet" href="<%= assetPath('css/header.css') %>">
+    <link rel="stylesheet" href="<%= assetPath('css/footer.css') %>">
+    <link rel="stylesheet" href="<%= assetPath('css/chat_box.css') %>">
 
     <!-- Noty notifications  -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js" integrity="sha512-lOrm9FgT1LKOJRUXF3tp6QaMorJftUjowOWiDcG5GFZ/q7ukof19V0HKx/GWzXCdt9zYju3/KhBNdCLzK8b90Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -31,24 +31,27 @@
         <% if(locals.user){ %>
         <section id="feed-posts" style="display: inline-block;">
             <form action="/post/create" id="new-post-form" method="post">
-            Posts<br><br>
+            <br>Posts<br><br>
                 <textarea name="content" id="content" placeholder="Type Here ...." rows="3" cols="30" required></textarea>
-                <br><br>
-                <input type="submit" value="Submit">
+                <br>
+                <input type="submit" id="submit" value="Submit">
             </form>
         </section>
         <% } %>
 
         <br>
+        <% if(locals.user){ %>
+        <br><br>
+        <% } %>
 
-        <p>Posts of the users</p>
+        <p style="padding-left: 10px;">Posts of the users</p>
 
         <ul>
             <% for(let post of posts){ %>
 
         <li class="post-<%= post._id %>" >
             <div class="post" >
-                <p style="border: 1px black solid; border-radius: 20px; box-sizing: border-box; padding: 10px; margin-bottom: 0.8em;">
+                <p style="border:2.5px #009deb solid; border-radius: 20px; box-sizing: border-box; padding: 10px; margin-bottom: 0.8em;">
                     <% if(locals.user && locals.user.id==post.user.id){ %>
                     <small><a id="delete-post-button" href="/post/destroy/<%=post.id%>"> X </a></small>
                     <% } %>
@@ -67,12 +70,12 @@
                 <p>Comments</p>
                 <div id="post-comments-<%=post.id%>" >
                 <% for(let comment of post.comments){ %>
-                    <!-- <%= comment.comment.content %> -->
+                    <!-- <%# comment.comment.content %> -->
                     <!-- <br> -->
                     <!-- <%# comment.user.name %> -->
                         <%# include("partials/comments"); %>
 
-                        <div id=comment-id-<%= comment.comment._id %> style="border: 1px black solid; border-radius: 20px; box-sizing: border-box; padding: 5px; margin-bottom: 0.8em;">
+                        <div id=comment-id-<%= comment.comment._id %> style="border: 1px rgb(0, 238, 255) solid; border-radius: 20px; box-sizing: border-box; padding: 7.5px; margin-bottom: 0.8em;">
 
                             <% if(locals.user && locals.user.id==comment.comment.user.id){ %>
                                 <small><a id="delete-comment-button" href="/comment/destroy/<%= comment.comment._id %>"> X </a></small>
@@ -88,7 +91,7 @@
                             <input type="text" class="comment_like_value" value="<%= comment.comment.likes.length %>" style="width: 1em;">
                             <a href="/likes/toggle?id=<%= comment.comment._id %>&type=Comment" class="comment_like">Like</a>
                             <!-- <button class="comment_like">Like</button> -->
-                            <br><br>
+                            <br>
                         </div>
 
                 <% } %>
@@ -98,7 +101,8 @@
                     <form id="comment-form" action="/comment/create" method="post">
                         <input type="hidden" name="post_id" value=<%=post.id%> >
                         <textarea name="comment" cols="30" rows="3" placeholder="Write Comment...." required></textarea>
-                        <input type="submit" value="Submit Comment!!">
+                        <br>
+                        <input type="submit" id="submit" value="Submit Comment!!">
                     </form>
                 </section>
                 <% } %>
@@ -176,10 +180,10 @@
 
 </script>
 
-<script src="/js/posts_comments_app_page.js"></script>
-<script src="/js/friends.js"></script>
+<script src="<%= assetPath('js/posts_comments_app_page.js') %>"></script>
+<script src="<%= assetPath('js/friends.js') %>"></script>
 
-<script src="/js/chat_engine.js"></script>
+<script src="<%= assetPath('js/chat_engine.js') %>"></script>
 <% if(locals.user){ %>
     <script>
         new ChatEngine("user-chat-box","<%= locals.user.user_email %>")

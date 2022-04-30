@@ -6,31 +6,34 @@
 <%- include("partials/header"); %>
 
 <head>
-    <link href="/css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/header.css">
-    <link rel="stylesheet" href="/css/footer.css">
+    <link href="<%= assetPath('css/style.css') %>" rel="stylesheet">
+    <link rel="stylesheet" href="<%= assetPath('css/header.css') %>">
+    <link rel="stylesheet" href="<%= assetPath('css/footer.css') %>">
+
 
 </head>
-<br>
-<br>
-<br>
-<img src="<%=profile_user.avatar%>" alt="<%=profile_user.name%>" width="100">
+<br><br><br>
+<div id="center_profile">
+
+<div class="user_info">
+
+<img src="<%=profile_user.avatar%>" alt="<%=profile_user.name%>" width="100" loading="lazy">
 
 <br><br>
-<div class="user_info">
+
 <% if(locals.user){ %>
 
 <br>
     <% if(locals.user.id==profile_user.id){ %>
         <form action="/user/update_user/<%=profile_user.id%>" method="post" enctype="multipart/form-data">
-            <input type="text" value="<%=profile_user.name%>" name="name" placeholder="Your Name" required>
+            <input type="text" value="<%=profile_user.name%>" name="name" placeholder="Your Name.." required>
             <br><br>
-            <input type="email" value="<%=profile_user.user_email%>" name="user_email" placeholder="Your Email" required>
+            <input type="email" value="<%=profile_user.user_email%>" name="user_email" placeholder="Your Email.." required>
             <br><br>
             <label for="">Profile Image</label><br>
             <input type="file" name="avatar">
             <br><br>
-            <input type="submit" value="Submit">
+            <input type="submit" value="Submit" id="Submit">
         </form>
     <% } %>
 
@@ -43,15 +46,17 @@
         <br>
         <br>
         <a href="/friends/check-friend?_id=<%= profile_user._id %>" type="hidden" id="check-friend"></a>
-        <a href="/friends?_id=<%= profile_user._id %>" id="friend">Add Friend</a>
+        <a href="/friends?_id=<%= profile_user._id %>" id="friend" style="text-decoration: none;">Add Friend</a>
     <% } %>
 
 <% } %>
 
 </div>
+
+</div>
 <br>
 <%- include("partials/footer"); %>
 
-<script src="/js/profile_friend_status.js"></script>
+<script src="<%= assetPath('js/profile_friend_status.js') %>"></script>
 
 </body>

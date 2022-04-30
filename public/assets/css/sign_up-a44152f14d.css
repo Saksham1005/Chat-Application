@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200;300&family=Quicksand&family=Ubuntu+Mono&display=swap');
+*{
+    /* border-bottom: 1px solid red; */
+}
+
+div.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+div.container h1{
+    margin-bottom: 1.1em;
+    font-weight: bolder;
+}
+
+/* form{
+    display: block;
+} */
+
+div.container div.form_section{
+    margin: 0 0 2em 0;
+    height: 3.2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+div.container div.form_section input{
+    border-radius: 18px;
+    padding: 0.6em;
+    border: 1px rgb(0, 255, 234) dashed;
+}
+
+#Submit{
+    border: none;
+    text-decoration: none;
+    background-color: rgb(0, 147, 192);
+    color: white;
+    padding: 0.8em 1.2em;
+
+    outline: none;
+    border-radius: 18px;
+    margin-top: 1em;
+    margin-left: 50%;
+    transform: translate(-50%,0);
+    cursor: pointer;
+
+}
+
+#Submit:hover{
+    background-color: rgb(0, 89, 116);
+}
+
+div.form_section label{
+    font-size: 1.2em;
+    text-decoration: underline;
+    font-weight: bolder;
+    display: inline-block;
+    padding: 0 0 0.3em 0;
+}

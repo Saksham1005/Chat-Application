@@ -13,6 +13,7 @@ const passportGoogle=require("./config/passport-google-oauth2-strategy");
 const env=require("./config/environment");
 const logger=require("morgan")
 const app=express();
+require("./config/view-helpers")(app);
 
 // Storing our logs in a seperate file
 app.use(logger(env.morgan.mode, env.morgan.options))
@@ -42,7 +43,6 @@ const customMware=require('./config/middleware')
 
 const public_directory=path.join(__dirname, env.asset_path);
 const views=path.join(__dirname,"./views")
-// const partials=path.join(__dirname,"./partials")
 const passport=require("passport")
 const passportLocal=require("./config/passport")
 const passportJWT=require("./config/passport-jwt")
@@ -87,7 +87,6 @@ app.use(flash())
 app.use(customMware.setFlash)
 
 app.use(router)
-// app.use(helpers)
 
 
 app.listen(port,()=>{

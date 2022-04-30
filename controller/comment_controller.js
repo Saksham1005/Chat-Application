@@ -74,8 +74,8 @@ module.exports.destroy=async(req,res)=>{
         // console.log(_id);
         let comment= await Comment.findOne({_id})
 
-        // console.log(comment);
-        // console.log(comment.post);
+        // console.log("comment -\n"+comment);
+        // console.log("post id\n"+comment.post+"\n\n");
         const post=await Post.findOne({_id:comment.post})
 
         post.comments=post.comments.filter((c)=>{

@@ -12,14 +12,14 @@ module.exports.chatSockets=function(SocketServer){
     );
 
     io.sockets.on("connection",function(socket){
-        console.log("New connection received", socket.id);
+        // console.log("New connection received", socket.id);
 
         socket.on("disconnect", function(){
-            console.log("Socket disconnected- ",socket.id);
+            // console.log("Socket disconnected- ",socket.id);
         })
 
         socket.on("join_room",function(data){
-            console.log("joining request rec.", data);
+            // console.log("joining request rec.", data);
 
             socket.join(data.chatroom);
 

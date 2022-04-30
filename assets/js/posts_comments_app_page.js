@@ -41,7 +41,7 @@
                 url:$(friend[i]).prop("href"),
                 type:"POST",
                 success:function(data){
-                    console.log(data);
+                    // console.log(data);
                     if(data.message=="Friend added"){
                         // friend.text("Remove Friend");
                     }
@@ -137,10 +137,11 @@ $(comment_form).submit(function(e){
         url:$(comment_form).attr('action'),
         data:$(comment_form).serialize(),
         success:function(data){
-            console.log("comment created");
+            // console.log("comment created");
             let comment=new_comment(data.data.comment);
+            // console.log(comment+"\n");
             $(`#post-comments-${data.data.comment.post}`).append(comment);
-            delete_comment($(`a#delete-comment-button`), comment);
+            delete_comment($("a#delete-comment-button", comment));
             comment_like_button(comment);
             noty_post(data.message);
         },
@@ -154,11 +155,13 @@ $(comment_form).submit(function(e){
 
 let delete_comment=function(delete_comment_button){
     $(delete_comment_button).click(function(e){
+        // console.log("event activated"+delete_comment_button);
         e.preventDefault();
         $.ajax({
             type:"GET",
             url:$(delete_comment_button).prop('href'),
             success:function(data){
+                // console.log($("div#comment-id-"+data.data.comment._id));
                 $("div#comment-id-"+data.data.comment._id).remove();
                 noty_post(data.message);
             },
@@ -231,7 +234,7 @@ let delete_comment=function(delete_comment_button){
 
 let new_comment=function(comment){
     return $(`
-    <div id="comment-id-${comment._id}" style="border: 1px black solid; border-radius: 20px; box-sizing: border-box; padding: 5px; margin-bottom: 0.8em;">
+    <div id="comment-id-${comment._id}" style="border: 1px rgb(0, 238, 255) solid; border-radius: 20px; box-sizing: border-box; padding: 7.5px; margin-bottom: 0.8em;">
         <small><a id="delete-comment-button" href="/comment/destroy/${comment._id}"> X </a></small>
         ${comment.content}
         <br>
@@ -241,7 +244,7 @@ let new_comment=function(comment){
         <input type="text" class="comment_like_value" value="${comment.likes.length}" style="width: 1em;">
         <a href="/likes/toggle?id=${comment._id}&type=Comment" class="comment_like">Like</a>
         
-        <br><br>
+        <br>
     </div>
     `);
 }
@@ -262,7 +265,7 @@ let newPostDOM=function(post,name){
                     <!-- comment like functionality for ajax created comments -->
                     <input type="text" class="post_like_value" value="${post.likes.length}" style="width: 1em;">
                     <a href="/likes/toggle?id=${post._id}&type=Post" class="post_like">Like</a>
-                    <br><br>            
+                    <br>            
 
                     </p>
                 <p>Comments</p>
