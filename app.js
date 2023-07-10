@@ -2,7 +2,6 @@ const express = require("express");
 // const hbs=require("hbs");
 const ejs = require("ejs");
 const path = require("path");
-const port = 3000;
 const router = require("./routes/index");
 const cookie_parser = require("cookie-parser");
 const db = require("./config/mongoose");
@@ -15,14 +14,17 @@ const logger = require("morgan");
 const app = express();
 require("./config/view-helpers")(app);
 
+const port = env.port || 3000;
+
 // Storing our logs in a seperate file
 app.use(logger(env.morgan.mode, env.morgan.options));
 
 // setup the chat server to be used with socket.io
 const chatServer = require("http").Server(app);
 const chatSockets = require("./config/chat_sockets").chatSockets(chatServer);
-chatServer.listen(5000);
-console.log("chat server is listening on port 5000");
+let chatServerPort = env.chatServer || 5000;
+chatServer.listen(chatServerPort);
+console.log("Chat Server is listening on Port: " + chatServerPort);
 
 // Flash messages
 const flash = require("connect-flash");
