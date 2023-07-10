@@ -1,15 +1,5 @@
 module.exports.chatSockets=function(SocketServer){
-    const io=require("socket.io")(SocketServer
-    //     ,{
-    //     cors: {
-    //         origin: "http://localhost:5000",
-    //         methods: ["GET", "POST"],
-    //         credentials: true,
-    //         allowEIO3: true
-    //     },
-    //     transport:['websocket']
-    // }
-    );
+    const io=require("socket.io")(SocketServer);
 
     io.sockets.on("connection",function(socket){
         // console.log("New connection received", socket.id);

@@ -58,7 +58,8 @@ ul#chat-messages-list li.other-message span{
     border-radius: 15px;
     padding: 5px;
     width: fit-content;
-    height: fit-content;
+    /* height: fit-content; */
+    display: inline-block;
     /* display: block; */
     background-color: blanchedalmond;
 }
