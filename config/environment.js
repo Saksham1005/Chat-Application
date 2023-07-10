@@ -16,7 +16,8 @@ const production = {
   name: "production",
   asset_path: process.env.chat_app_asset_path,
   session_cookie_key: process.env.chat_app_session_cookie_key,
-  db: process.env.chat_app_db,
+  db: "mongodb://127.0.0.1:27017/" + process.env.chat_app_db,
+  prod_db: process.env.prod_db,
   smtp: {
     service: "gmail",
     host: "smtp.gmail.com",
