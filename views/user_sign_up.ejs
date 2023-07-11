@@ -1,49 +1,82 @@
 <head>
-    <link rel="stylesheet" href="<%= assetPath('css/sign_up.css') %>">
-    <link href="<%= assetPath('css/style.css') %>" rel="stylesheet">
-    <link rel="stylesheet" href="<%= assetPath('css/header.css') %>">
-    <link rel="stylesheet" href="<%= assetPath('css/footer.css') %>">
-
+  <link
+    rel="stylesheet"
+    href="<%= assetPath('css/sign_up.css') %>"
+    type="text/css"
+  />
+  <link
+    href="<%= assetPath('css/style.css') %>"
+    rel="stylesheet"
+    type="text/css"
+  />
+  <link
+    rel="stylesheet"
+    href="<%= assetPath('css/header.css') %>"
+    type="text/css"
+  />
+  <link
+    rel="stylesheet"
+    href="<%= assetPath('css/footer.css') %>"
+    type="text/css"
+  />
 </head>
-<body>    
+<body>
+  <!-- {{>header}} -->
+  <%- include("partials/header"); %>
 
-<!-- {{>header}} -->
-<%- include("partials/header"); %>
-
-<div class="container">
+  <div class="container">
     <h1>User sign up</h1>
     <form action="/user/create" method="POST">
-        <div class="form_section">
+      <div class="form_section">
         <label for="">Name</label>
-        <input type="text" name="name" placeholder="Enter your name." required>
-        </div>
+        <input
+          type="text"
+          name="name"
+          placeholder="Enter your name."
+          required
+        />
+      </div>
 
-        <div class="form_section">
+      <div class="form_section">
         <label for="">Email</label>
-        <input type="email" name="user_email" placeholder="Enter your email." required>
-        </div>
-        
-        <div class="form_section">
-        <label for="">Password</label>
-        <input type="password" name="password" placeholder="Enter your password." required>
-        </div>
-        
-        <div class="form_section">
-        <label for="">Confirm Password</label>
-        <input type="password" name="confirm_password" placeholder="Confirm your password." required>
-        </div>
-        
-        <input id="Submit" type="submit" value="Sign up">
+        <input
+          type="email"
+          name="user_email"
+          placeholder="Enter your email."
+          required
+        />
+      </div>
 
+      <div class="form_section">
+        <label for="">Password</label>
+        <input
+          type="password"
+          name="password"
+          placeholder="Enter your password."
+          required
+        />
+      </div>
+
+      <div class="form_section">
+        <label for="">Confirm Password</label>
+        <input
+          type="password"
+          name="confirm_password"
+          placeholder="Confirm your password."
+          required
+        />
+      </div>
+
+      <input id="Submit" type="submit" value="Sign up" />
     </form>
 
     <p>
-        <a href="/user/auth/google" style="text-decoration: none;">Google Sign In/ Sign Up</a>
+      <a href="/user/auth/google" style="text-decoration: none"
+        >Google Sign In/ Sign Up</a
+      >
     </p>
-</div>
+  </div>
 
-
-<!-- {{>footer}} -->
-<%- include("partials/footer"); %>
-
+  <!-- {{>footer}} -->
+  <%- include("partials/footer"); %>
 </body>

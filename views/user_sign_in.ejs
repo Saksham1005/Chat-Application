@@ -1,40 +1,73 @@
 <!-- {{>header}} -->
-<%- include("partials/header"); %>
 <head>
-    <link href="<%= assetPath('css/style.css') %>" rel="stylesheet">
-    <link rel="stylesheet" href="<%= assetPath('css/header.css') %>">
-    <link rel="stylesheet" href="<%= assetPath('css/footer.css') %>">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js" integrity="sha512-lOrm9FgT1LKOJRUXF3tp6QaMorJftUjowOWiDcG5GFZ/q7ukof19V0HKx/GWzXCdt9zYju3/KhBNdCLzK8b90Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css" integrity="sha512-0p3K0H3S6Q4bEWZ/WmC94Tgit2ular2/n0ESdfEX8l172YyQj8re1Wu9s/HT9T/T2osUw5Gx/6pAZNk3UKbESw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="<%= assetPath('css/sign_in.css') %>">
-
+  <link
+    href="<%= assetPath('css/style.css') %>"
+    rel="stylesheet"
+    type="text/css"
+  />
+  <link
+    rel="stylesheet"
+    href="<%= assetPath('css/header.css') %>"
+    type="text/css"
+  />
+  <link
+    rel="stylesheet"
+    href="<%= assetPath('css/footer.css') %>"
+    type="text/css"
+  />
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"
+    integrity="sha512-lOrm9FgT1LKOJRUXF3tp6QaMorJftUjowOWiDcG5GFZ/q7ukof19V0HKx/GWzXCdt9zYju3/KhBNdCLzK8b90Q=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css"
+    integrity="sha512-0p3K0H3S6Q4bEWZ/WmC94Tgit2ular2/n0ESdfEX8l172YyQj8re1Wu9s/HT9T/T2osUw5Gx/6pAZNk3UKbESw=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  <link
+    rel="stylesheet"
+    href="<%= assetPath('css/sign_in.css') %>"
+    type="text/css"
+  />
 </head>
 <body>
-    
-<div class="design">
-    
-<br>
-<h1>User sign in</h1>
-<br>
-<form action="/user/create-session" method="post">
-    <input type="text" name="user_email" placeholder="Enter your email." id="text">
-    <br><br>
-    <input type="password" name="password" placeholder="Enter your password." id="password">
-    
-    <br><br>
-    <button type="submit" id="Submit">Submit</button>
+  <%- include("partials/header"); %>
 
-</form>
-<br>
-    <p>
-        <a href="/user/forgot-password">Forgot Password</a>
-    </p>
-<br>
-    <p>
-        <a href="/user/auth/google" >Google Sign In/ Sign Up</a>
-    </p>
+  <div class="design">
+    <br />
+    <h1>User sign in</h1>
+    <br />
+    <form action="/user/create-session" method="post">
+      <input
+        type="text"
+        name="user_email"
+        placeholder="Enter your email."
+        id="text"
+      />
+      <br /><br />
+      <input
+        type="password"
+        name="password"
+        placeholder="Enter your password."
+        id="password"
+      />
 
-</div>
+      <br /><br />
+      <button type="submit" id="Submit">Submit</button>
+    </form>
+    <br />
+    <p>
+      <a href="/user/forgot-password">Forgot Password</a>
+    </p>
+    <br />
+    <p>
+      <a href="/user/auth/google">Google Sign In/ Sign Up</a>
+    </p>
+  </div>
 </body>
 
 <!-- {{>footer}} -->
@@ -42,18 +75,18 @@
 
 <script>
 
-    // {{#if flash.error }}
-    <% if (flash.error && flash.error.length > 0) { %>
-        // {{#compare flash.error.length ">" 0 }}
-            new Noty({
-                type:'error',
-                text: '<%=flash.error%>',
-                layout:'topRight',
-                theme: 'relax',
-                timeout: 1500,
-                progressBar:true
-            }).show();
-        // {{/compare}}
-    <% } %>
-    // {{/if}}
+  // {{#if flash.error }}
+  <% if (flash.error && flash.error.length > 0) { %>
+      // {{#compare flash.error.length ">" 0 }}
+          new Noty({
+              type:'error',
+              text: '<%=flash.error%>',
+              layout:'topRight',
+              theme: 'relax',
+              timeout: 1500,
+              progressBar:true
+          }).show();
+      // {{/compare}}
+  <% } %>
+  // {{/if}}
 </script>
