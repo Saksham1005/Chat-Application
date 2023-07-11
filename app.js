@@ -30,7 +30,7 @@ console.log("Chat Server is listening on Port: " + chatServerPort);
 const flash = require("connect-flash");
 const customMware = require("./config/middleware");
 
-const public_directory = path.join(__dirname, env.asset_path);
+const public_directory = path.join(__dirname, "./public/assets");
 const views = path.join(__dirname, "./views");
 const passport = require("passport");
 const passportLocal = require("./config/passport");
