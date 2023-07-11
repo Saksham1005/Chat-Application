@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const env = require("../config/environment");
 
 // `mongodb://127.0.0.1:27017/${env.db}` --- db
-mongoose.connect(env.db, {
+mongoose.connect(env.prod_db, {
   useNewUrlParser: true,
   // useCreateIndex:true ,
   // useFindAndModify:false,
