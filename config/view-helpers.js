@@ -10,7 +10,7 @@ module.exports = (app) => {
       return filePath;
     }
 
-    return filePath;
+    // return filePath;
 
     return (
       "/" +
