@@ -180,10 +180,10 @@
 
 </script>
 
-<script src="<%= assetPath('js/posts_comments_app_page.js') %>" type="text/js"></script>
-<script src="<%= assetPath('js/friends.js') %>" type="text/js"></script>
+<script src="<%= assetPath('js/posts_comments_app_page.js') %>" ></script>
+<script src="<%= assetPath('js/friends.js') %>" ></script>
 
-<script src="<%= assetPath('js/chat_engine.js') %>" type="text/js"></script>
+<script src="<%= assetPath('js/chat_engine.js') %>" ></script>
 <% if(locals.user){ %>
     <script>
         new ChatEngine("user-chat-box","<%= locals.user.user_email %>")
