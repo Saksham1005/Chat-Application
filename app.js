@@ -1,5 +1,4 @@
 const express = require("express");
-// const hbs=require("hbs");
 const ejs = require("ejs");
 const path = require("path");
 const router = require("./routes/index");
