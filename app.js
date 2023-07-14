@@ -19,7 +19,7 @@ const port = env.port || 3000;
 app.use(logger(env.morgan.mode, env.morgan.options));
 
 // setup the chat server to be used with socket.io
-const chatServer = require("https").Server(app);
+const chatServer = require("http").Server(app);
 const chatSockets = require("./config/chat_sockets").chatSockets(chatServer);
 let chatServerPort = env.chatServer || 5000;
 chatServer.listen(chatServerPort);

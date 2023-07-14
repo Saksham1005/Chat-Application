@@ -5,27 +5,26 @@
     crossorigin="anonymous"
     referrerpolicy="no-referrer"
   ></script>
+
+  <link
+    href="<%= assetPath('css/style.css') %>"
+    rel="stylesheet"
+    type="text/css"
+  />
+  <link
+    rel="stylesheet"
+    href="<%= assetPath('css/header.css') %>"
+    type="text/css"
+  />
+  <link
+    rel="stylesheet"
+    href="<%= assetPath('css/footer.css') %>"
+    type="text/css"
+  />
 </head>
+
 <body>
   <%- include("partials/header"); %>
-
-  <head>
-    <link
-      href="<%= assetPath('css/style.css') %>"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <link
-      rel="stylesheet"
-      href="<%= assetPath('css/header.css') %>"
-      type="text/css"
-    />
-    <link
-      rel="stylesheet"
-      href="<%= assetPath('css/footer.css') %>"
-      type="text/css"
-    />
-  </head>
   <br /><br /><br />
   <div id="center_profile">
     <div class="user_info">
