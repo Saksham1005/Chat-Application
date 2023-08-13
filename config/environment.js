@@ -23,11 +23,11 @@ const production = {
   smtp: {
     service: "gmail",
     host: "smtp.gmail.com",
-    port: 587,
-    secure: false,
+    port: 465,
+    secure: true,
     auth: {
-      user: process.env.gmail,
-      pass: process.env.password,
+      user: process.env.chat_app_gmail,
+      pass: "nslqtrxzumhdgpkm",
     },
   },
   google_clientID: process.env.chat_app_google_clientID,
