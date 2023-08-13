@@ -9,14 +9,14 @@ const MongoStore = require("connect-mongo")(session);
 const passportGoogle = require("./config/passport-google-oauth2-strategy");
 
 const env = require("./config/environment");
-const logger = require("morgan");
+// const logger = require("morgan");
 const app = express();
 require("./config/view-helpers")(app);
 
 const port = env.port || 3000;
 
 // Storing our logs in a seperate file
-app.use(logger(env.morgan.mode, env.morgan.options));
+// app.use(logger(env.morgan.mode, env.morgan.options));
 
 // setup the chat server to be used with socket.io
 const chatServer = require("http").Server(app);
