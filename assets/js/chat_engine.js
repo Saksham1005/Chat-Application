@@ -4,7 +4,7 @@ class ChatEngine {
     this.user_email = user_email;
 
     this.socket = io.connect(
-      "https://social-media-web-application.onrender.com:5000"
+      "https://chat-application-production-488f.up.railway.app:5000"
     );
     // this.socket=io.connect("127.0.0.1:5000");
 
