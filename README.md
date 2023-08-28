@@ -7,6 +7,8 @@ authentication strategies in the project and made an inbuilt Chat Engine with So
 
 Used Express.js to establish the Web Server and NoSQL to create the database.
 
+Deployed the Node.js Express Application on Railway.
+
 ## Tech Stack
 
 **Client:** HTML, CSS, Node.js, Socket.io, Express.js, NoSQL(MongoDB)
